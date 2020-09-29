@@ -1,0 +1,142 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap");
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+html, body, div, span, object, iframe, figure, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, code, em, img, small, strike, strong, sub, sup, tt, b, u, i, ol, ul, li, fieldset, form, label, table, caption, tbody, tfoot, thead, tr, th, td, main, canvas, embed, footer, header, nav, section, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  text-size-adjust: none;
+}
+
+footer, header, nav, section, main {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after, q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+input {
+  -webkit-appearance: none;
+  border-radius: 0;
+}
+
+input[type=search] {
+  width: 350px;
+  height: 30px;
+  padding: 20px 10px;
+  font-family: "Rubik", sans-serif;
+  font-size: 18px;
+  border: none;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+form {
+  position: relative;
+}
+form button {
+  position: absolute;
+  top: 10px;
+  right: 0;
+  background-color: #000;
+  height: 40px;
+  width: 35px;
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+  border: none;
+}
+form button:hover, form button:active {
+  background-color: #4d4d4d;
+  cursor: pointer;
+}
+
+.location-grid {
+  position: absolute;
+  background-color: #fff;
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  top: 150px;
+  width: 350px;
+  justify-self: center;
+  height: auto;
+  z-index: 3;
+}
+.location-grid .grid-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0;
+}
+.location-grid .grid-item p {
+  font: 500 12px "Rubik", sans-serif;
+  text-transform: uppercase;
+  color: #969696;
+  letter-spacing: 1px;
+}
+.location-grid .grid-item span {
+  font: 500 18px "Rubik", sans-serif;
+}
+
+@media screen and (min-width: 376px) {
+  .location-grid {
+    width: calc(100% - 64px);
+  }
+}
+@media screen and (min-width: 979px) {
+  .location-grid .grid-item {
+    align-items: flex-start;
+    margin: 20px 20px;
+  }
+}
+.location-map {
+  height: 75vh;
+  width: 100%;
+  z-index: 1;
+}
+
+.tracker-group {
+  background-image: url("../../../images/pattern-bg.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 25vh;
+  width: 100%;
+}
+.tracker-group h1 {
+  font: 400 32px "Rubik", sans-serif;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+/*# sourceMappingURL=style.css.map */
