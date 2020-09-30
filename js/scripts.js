@@ -1,5 +1,14 @@
-// IPIFY
-var ip = "8.8.8.8";
+// SEARCH INPUT AND BUTTON
+var searchInput = document.getElementById('ip-address-input');
+var searchButton = document.getElementById('search-button');
+
+searchButton.addEventListener('click', function(e) {
+    e.preventDefault();
+    var searchInputValue = searchInput.value;
+    // console.log(searchInputValue);
+    searchInput.value = '';
+    // IPIFY
+var ip = searchInputValue;
 var api_key = "at_3qU3a2WWwxwh36bo19rAfTgCWwnRA";
 
 $(function(){
@@ -37,3 +46,5 @@ $(function(){
         }
     });
 });
+});
+
