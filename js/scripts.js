@@ -17,22 +17,23 @@ $(function(){
             timeZone.innerHTML = data.location.timezone;
             isp.innerHTML = data.isp;
             console.log(data.location.city, data.location.region);
+            var latLocation = data.location.lat;
+            var lngLocation = data.location.lng;
+            // LEAFLET
+            var mymap = L.map('location-map').setView([latLocation, lngLocation], 12);
+            L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+                maxZoom: 18,
+                id: 'mapbox/streets-v11',
+                tileSize: 512,
+                zoomOffset: -1,
+                accessToken: 'pk.eyJ1IjoiZGllZ290b3JyZXM5IiwiYSI6ImNrZm9sYWN5aDAzZzgzMGxkd3VvbnVkczIifQ.siD760YhTxGGgoQ-OVQhSw'
+            }).addTo(mymap);
+
+            var customMarker = L.icon({
+                iconUrl: '../images/icon-location.svg',
+                iconSize: [46, 56]
+            });
+            L.marker([latLocation, lngLocation], {icon: customMarker}).addTo(mymap);
         }
     });
 });
-
-// LEAFLET
-var mymap = L.map('location-map').setView([40.105, -75.345], 12);
-L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-    maxZoom: 18,
-    id: 'mapbox/streets-v11',
-    tileSize: 512,
-    zoomOffset: -1,
-    accessToken: 'pk.eyJ1IjoiZGllZ290b3JyZXM5IiwiYSI6ImNrZm9sYWN5aDAzZzgzMGxkd3VvbnVkczIifQ.siD760YhTxGGgoQ-OVQhSw'
-}).addTo(mymap);
-
-var customMarker = L.icon({
-    iconUrl: '../images/icon-location.svg',
-    iconSize: [46, 56]
-});
-L.marker([40.105, -75.345], {icon: customMarker}).addTo(mymap);
