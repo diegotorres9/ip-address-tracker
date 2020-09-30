@@ -106,13 +106,19 @@ form button:hover, form button:active {
 
 @media screen and (min-width: 376px) {
   .location-grid {
+    top: 140px;
+    width: calc(100% - 64px);
+  }
+}
+@media screen and (min-width: 450px) {
+  .location-grid {
     top: 180px;
     width: calc(100% - 64px);
   }
 }
-@media screen and (min-width: 979px) {
+@media screen and (min-width: 500px) {
   .location-grid {
-    top: 200px;
+    top: 180px;
   }
   .location-grid .grid-item {
     align-items: flex-start;
