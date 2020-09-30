@@ -82,7 +82,7 @@ form button:hover, form button:active {
   border-radius: 10px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  top: 150px;
+  top: 140px;
   width: 350px;
   justify-self: center;
   height: auto;
@@ -106,10 +106,14 @@ form button:hover, form button:active {
 
 @media screen and (min-width: 376px) {
   .location-grid {
+    top: 180px;
     width: calc(100% - 64px);
   }
 }
 @media screen and (min-width: 979px) {
+  .location-grid {
+    top: 200px;
+  }
   .location-grid .grid-item {
     align-items: flex-start;
     margin: 20px 20px;
