@@ -24,7 +24,7 @@ fetch('https://geo.ipify.org/api/v1?apiKey=at_3qU3a2WWwxwh36bo19rAfTgCWwnRA&ipAd
     }).addTo(leafletMap);
 
     var customMarker = L.icon({
-        iconUrl: '../images/icon-location.svg',
+        iconUrl: 'images/icon-location.svg',
         iconSize: [46, 56]
     });
     L.marker([ipInfo[6], ipInfo[7]], {icon: customMarker}).addTo(leafletMap);
@@ -64,7 +64,7 @@ searchButton.addEventListener('click', (e) => {
             }).addTo(leafletMap);
         
             var customMarker = L.icon({
-                iconUrl: '../images/icon-location.svg',
+                iconUrl: 'images/icon-location.svg',
                 iconSize: [46, 56]
             });
             L.marker([ipInputInfo[6], ipInputInfo[7]], {icon: customMarker}).addTo(leafletMap);
