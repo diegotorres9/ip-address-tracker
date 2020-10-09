@@ -78,51 +78,47 @@ form button:hover, form button:active {
 
 .location-grid {
   position: absolute;
-  background-color: #fff;
   border-radius: 10px;
+  background-color: #fff;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  justify-content: center;
   top: 140px;
-  width: 350px;
-  justify-self: center;
-  height: auto;
-  z-index: 3;
+  width: calc(100% - 32px);
+  z-index: 2;
+  height: 376px;
 }
-.location-grid .grid-item {
+.location-grid .location-grid_item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 20px 0;
+  text-align: center;
 }
-.location-grid .grid-item p {
+.location-grid .location-grid_item p {
   font: 500 12px "Rubik", sans-serif;
   text-transform: uppercase;
   color: #969696;
   letter-spacing: 1px;
+  margin: 10px 20px;
 }
-.location-grid .grid-item span {
+.location-grid .location-grid_item span {
+  margin: 10px 20px;
   font: 500 18px "Rubik", sans-serif;
 }
 
-@media screen and (min-width: 376px) {
+@media screen and (min-width: 632px) {
   .location-grid {
-    top: 140px;
-    width: calc(100% - 64px);
+    height: 161px;
   }
-}
-@media screen and (min-width: 450px) {
-  .location-grid {
-    top: 180px;
-    width: calc(100% - 64px);
+  .location-grid .location-grid_item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
   }
-}
-@media screen and (min-width: 500px) {
-  .location-grid {
-    top: 180px;
-  }
-  .location-grid .grid-item {
-    align-items: flex-start;
-    margin: 20px 20px;
+  .location-grid .location-grid_item .grid-item_divider {
+    height: calc(100% - 50px);
+    width: 1px;
+    background-color: #969696;
   }
 }
 .location-map {
