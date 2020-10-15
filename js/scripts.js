@@ -1,72 +1,73 @@
 // ------------------********************************----------------------------------------
-// Inital fetch request to populate html fields and location map based on user location
-var leafletMap = L.map('location-map');
-fetch('https://geo.ipify.org/api/v1?apiKey=at_3qU3a2WWwxwh36bo19rAfTgCWwnRA&ipAddress=')
-.then(response => response.json())
-.then(data => {
-    let ipInfo = [];
-    ipInfo.push(data.ip, data.location.city, data.location.region, data.location.postalCode, data.location.timezone, data.isp, data.location.lat, data.location.lng);
+const baseEndpoint = 'https://geo.ipify.org/api/v1';
+const apiKey = 'at_3qU3a2WWwxwh36bo19rAfTgCWwnRA';
+const customMarker = L.icon({
+    iconUrl: 'images/icon-location.svg',
+    iconSize: [46,55]
+});
+let mymap;
 
-    document.querySelector('.ip-address').innerHTML = ipInfo[0];
-    document.querySelector('.location-span').innerHTML = ipInfo[1] + ', ' + ipInfo[2] + ' ' + ipInfo[3];
-    document.querySelector('.timezone-span').innerHTML = 'UTC ' + ipInfo[4];
-    document.querySelector('.isp-span').innerHTML = ipInfo[5];
-
-    leafletMap.setView(new L.LatLng(ipInfo[6],ipInfo[7]),12);
-    
+function gridValues(searchResult) {
+    document.querySelector('.ip-address').textContent = searchResult.ip;
+    document.querySelector('.location-span').textContent = `${searchResult.location.city}, ${searchResult.location.region} ${searchResult.location.postalCode}`;
+    document.querySelector('.timezone-span').textContent = `UTC ${searchResult.location.timezone}`;
+    document.querySelector('.isp-span').textContent = searchResult.isp;
+}
+function createMap(searchResult) {
+    mymap.setView([searchResult.location.lat, searchResult.location.lng], 15);
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
     id: 'mapbox/streets-v11',
     tileSize: 512,
     zoomOffset: -1,
-    accessToken: 'pk.eyJ1IjoiZGllZ290b3JyZXM5IiwiYSI6ImNrZm9sYWN5aDAzZzgzMGxkd3VvbnVkczIifQ.siD760YhTxGGgoQ-OVQhSw'
-    }).addTo(leafletMap);
+    accessToken: 'pk.eyJ1IjoiZGllZ290b3JyZXM5IiwiYSI6ImNrZm9sY3phZjAyOHoycnM5MTh5YjF5em8ifQ.WEcj32llLyotdltO2DCouA'
+}).addTo(mymap);
+L.marker([searchResult.location.lat, searchResult.location.lng], {icon: customMarker}).addTo(mymap);
+}
 
-    var customMarker = L.icon({
-        iconUrl: '../images/icon-location.svg',
-        iconSize: [46, 56]
-    });
-    L.marker([ipInfo[6], ipInfo[7]], {icon: customMarker}).addTo(leafletMap);
-});
-
-
-// Grab the search button in html and run a function to get the ip or domain that a user inputs
-// then use that value to fetch from the IP Database to update html fields and Map
-let searchButton = document.querySelector('.search-button');
-searchButton.addEventListener('click', (e) => {
+async function ipSearch() {
+    let url = `${baseEndpoint}?apiKey=${apiKey}&ipAddress=&domain=`;
+    try{
+        let response = await fetch(url);
+        return await response.json();
+    }
+    catch(error) {
+        console.log(error);
+    }
+}
+async function useIp() {
+    let searchResult = await ipSearch();
+    gridValues(searchResult);
+    createMap(searchResult);
+    // console.log(searchResult);
+}
+let userSearchInput;
+document.querySelector('#search-button').addEventListener('click', (e) => {
     e.preventDefault();
-    let searchInput = document.querySelector('#ip-address-input');
-    let searchInputValue = searchInput.value;
+    let searchInput = document.querySelector('#search-input');
+    userSearchInput = searchInput.value;
     searchInput.value = '';
-
-    fetch(`https://geo.ipify.org/api/v1?apiKey=at_3qU3a2WWwxwh36bo19rAfTgCWwnRA&ipAddress=${searchInputValue}`)
-    .then(response => response.json())
-    .then(data => {
-        let ipInputInfo = [];
-        ipInputInfo.push(data.ip, data.location.city, data.location.region, data.location.postalCode, data.location.timezone, data.isp, data.location.lat, data.location.lng);
-
-        // console.log(ipInputInfo);
-        document.querySelector('.ip-address').innerHTML = ipInputInfo[0];
-        document.querySelector('.location-span').innerHTML = ipInputInfo[1] + ', ' + ipInputInfo[2] + ' ' + ipInputInfo[3];
-        document.querySelector('.timezone-span').innerHTML = 'UTC ' + ipInputInfo[4];
-        document.querySelector('.isp-span').innerHTML = ipInputInfo[5];
-
-        leafletMap.setView(new L.LatLng(ipInputInfo[6], ipInputInfo[7]),12);
-
-        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-            maxZoom: 18,
-            id: 'mapbox/streets-v11',
-            tileSize: 512,
-            zoomOffset: -1,
-            accessToken: 'pk.eyJ1IjoiZGllZ290b3JyZXM5IiwiYSI6ImNrZm9sYWN5aDAzZzgzMGxkd3VvbnVkczIifQ.siD760YhTxGGgoQ-OVQhSw'
-            }).addTo(leafletMap);
-        
-            var customMarker = L.icon({
-                iconUrl: '../images/icon-location.svg',
-                iconSize: [46, 56]
-            });
-            L.marker([ipInputInfo[6], ipInputInfo[7]], {icon: customMarker}).addTo(leafletMap);
-    });
+    useUserIpSearch(userSearchInput);
 });
+async function userIpSearch() {
+    let userUrl = `${baseEndpoint}?apiKey=${apiKey}&ipAddress=${userSearchInput}&domain=${userSearchInput}`;
+    try {
+        let response = await fetch(userUrl);
+        return await response.json();
+    } catch(error) {
+        console.log(error);
+    }
+}
+async function useUserIpSearch(userSearchInput) {
+    let searchResult = await userIpSearch();
+    gridValues(searchResult);
+    createMap(searchResult);
+}
+// useUserIpSearch();
+// ipSearch();
+function init(){
+    useIp();
+    mymap = L.map('location-map');
+}
+init();
