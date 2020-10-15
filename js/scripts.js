@@ -64,8 +64,7 @@ async function useUserIpSearch(userSearchInput) {
     gridValues(searchResult);
     createMap(searchResult);
 }
-// useUserIpSearch();
-// ipSearch();
+
 function init(){
     useIp();
     mymap = L.map('location-map');
