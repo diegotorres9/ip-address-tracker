@@ -1,0 +1,12 @@
+.searchbar__container {
+    display: flex;
+    width: 100%;
+}
+.address__searchbar {
+    padding: 19px 24px;
+    background-color: #fff;
+    color: #2c2c2c;
+    border: none;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
