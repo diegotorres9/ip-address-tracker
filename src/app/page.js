@@ -1,7 +1,10 @@
 'use client';
 import Search from "@/components/Search";
+import Location from "@/components/Location";
 import styles from './page.module.css';
 import dynamic from "next/dynamic";
+import { useState } from "react";
+
 
 const Map = dynamic(() => import('@/components/Map'), 
   {
@@ -9,14 +12,41 @@ const Map = dynamic(() => import('@/components/Map'),
     ssr: false
   });
 
+
 export default function Home() {
+  const [inputValue, setInputValue] = useState('');
+  const [locationData, setLocationData] = useState([])
+
+  const handleSearch = (e) => {
+    setInputValue(e.target.value);
+  }
+
+  const geolocate = async (e) => {
+    if(e) e.preventDefault();
+    const data = await fetch(`https://geo.ipify.org/api/v1?apiKey=at_3qU3a2WWwxwh36bo19rAfTgCWwnRA&ipAddress=${inputValue}&domain=`);
+    const locationData = await data.json();
+    // console.log(locationData);
+    setLocationData(locationData);
+    return locationData;
+  }
+
+
   return (
     <main>
       <section className={styles.tracker__container}>
         <h1>IP Address Tracker</h1>
-        <Search />
+        <Search 
+        geolocate={geolocate}
+        handleSearch={handleSearch}
+        
+        />
+        <Location
+          locationData={locationData}
+        />
       </section>
-      <Map />
+      <Map 
+          locationData={locationData}
+      />
     </main>
   );
 }
