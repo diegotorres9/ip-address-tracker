@@ -23,7 +23,7 @@ export default function Home() {
 
   const geolocate = async (e) => {
     if(e) e.preventDefault();
-    const data = await fetch(`https://geo.ipify.org/api/v1?apiKey=at_3qU3a2WWwxwh36bo19rAfTgCWwnRA&ipAddress=${inputValue}&domain=`);
+    const data = await fetch(`https://geo.ipify.org/api/v1?apiKey=at_3qU3a2WWwxwh36bo19rAfTgCWwnRA&ipAddress=${inputValue}&domain=${inputValue}`);
     const locationData = await data.json();
     // console.log(locationData);
     setLocationData(locationData);
@@ -34,7 +34,7 @@ export default function Home() {
   return (
     <main>
       <section className={styles.tracker__container}>
-        <h1>IP Address Tracker</h1>
+        <h1 className={styles.title}>IP Address Tracker</h1>
         <Search 
         geolocate={geolocate}
         handleSearch={handleSearch}
