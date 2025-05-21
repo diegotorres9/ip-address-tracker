@@ -18,7 +18,7 @@ export default function Search({geolocate, handleSearch}) {
                 </input>
                 <button
                     type="submit"
-                    className="search__btn"
+                    className={styles.search__button}
                 >
                 <Image 
                     src='/images/icon-arrow.svg'
