@@ -7,10 +7,6 @@ import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 import { geolocate } from "@/services/geolocation";
 import { useEffect } from "react";
 
-
-
-// const geoLat = coordinates.location.lat;
-// const geoLng = coordinates.location.lng;
 const coordinates = await geolocate();
 
 
@@ -21,15 +17,10 @@ export default function Map ({locationData}) {
     let latCoord = coordinates.location.lat;
     let lngCoord = coordinates.location.lng;
 
-    // let geoLat;
-    // let geoLng;
-
     if(locationData.length !== 0) {
         latCoord = locationData.location.lat;
         lngCoord = locationData.location.lng;
     }
-
-    // console.log(geoLat, geoLng);
 
     return (
         <MapContainer center={[latCoord, lngCoord]} zoom={12} scrollWheelZoom={false} style={{height: '800px'}}>
