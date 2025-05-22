@@ -16,10 +16,12 @@ export default function Map ({locationData}) {
 
     let latCoord = coordinates.location.lat;
     let lngCoord = coordinates.location.lng;
+    let locale = coordinates.location.city;
 
     if(locationData.length !== 0) {
         latCoord = locationData.location.lat;
         lngCoord = locationData.location.lng;
+        locale = coordinates.location.city
     }
 
     return (
@@ -31,7 +33,7 @@ export default function Map ({locationData}) {
             />
             <Marker position={[latCoord, lngCoord]}>
                 <Popup>
-                    a customizable popup
+                    {locale}
                 </Popup>
             </Marker>
         </MapContainer>
