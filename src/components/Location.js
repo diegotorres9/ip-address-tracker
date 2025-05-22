@@ -3,7 +3,6 @@ import { geolocate } from "@/services/geolocation";
 import styles from './location.module.css';
 
 const locationInfo = await geolocate();
-// console.log(locationInfo);
 
 export default function Location({locationData}) {
     useEffect(() => {}, [locationData]);
