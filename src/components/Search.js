@@ -1,8 +1,7 @@
 'use client';
 import Image from "next/image";
 import styles from './search.module.css';
-// import { geolocate } from "@/services/geolocation";
-// import { useEffect } from "react";
+
 
 
 export default function Search({geolocate, handleSearch}) {
