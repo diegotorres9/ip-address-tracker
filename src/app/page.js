@@ -43,9 +43,9 @@ export default function Home() {
           locationData={locationData}
         />
       </section>
-      <Map 
-          locationData={locationData}
-      />
+        <Map 
+            locationData={locationData}
+        />
     </main>
   );
 }
