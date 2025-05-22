@@ -3,12 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "start": "next start",
+    "dev": "dotenvx run -- next dev --turbopack",
+    "build": "dotenvx run -- next build",
+    "start": "dotenvx run -- next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "@dotenvx/dotenvx": "^1.44.1",
     "leaflet": "^1.9.4",
     "leaflet-defaulticon-compatibility": "^0.1.2",
     "next": "15.3.2",
