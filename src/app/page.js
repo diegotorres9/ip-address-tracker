@@ -12,7 +12,6 @@ const Map = dynamic(() => import('@/components/Map'),
     ssr: false
   });
 
-
 export default function Home() {
   const [inputValue, setInputValue] = useState('');
   const [locationData, setLocationData] = useState([])
@@ -23,7 +22,7 @@ export default function Home() {
 
   const geolocate = async (e) => {
     if(e) e.preventDefault();
-    const data = await fetch(`https://geo.ipify.org/api/v1?apiKey=at_3qU3a2WWwxwh36bo19rAfTgCWwnRA&ipAddress=${inputValue}&domain=${inputValue}`);
+    const data = await fetch(`https://geo.ipify.org/api/v1?apiKey=${process.env.NEXT_PUBLIC_API_KEY}&ipAddress=${inputValue}&domain=${inputValue}`);
     const locationData = await data.json();
     // console.log(locationData);
     setLocationData(locationData);

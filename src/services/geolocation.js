@@ -1,5 +1,5 @@
 export async function geolocate() {
-    const data = await fetch('https://geo.ipify.org/api/v1?apiKey=at_3qU3a2WWwxwh36bo19rAfTgCWwnRA&ipAddress=&domain=');
+    const data = await fetch(process.env.NEXT_PUBLIC_API_CALL);
     const coordData = await data.json();
     return coordData;
 }
